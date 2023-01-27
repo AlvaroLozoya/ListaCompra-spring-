@@ -17,7 +17,7 @@ import com.uax.spring.listacompra.mappers.CompraRowMapper;
 public class CompraRepository implements ICompraRepository {
 
 	@Autowired
-	@Qualifier("jdbcTemplate")
+	@Qualifier("jdbcTemplateDB1")
 	private JdbcTemplate jdbctemplate;
 	
 	@Autowired
