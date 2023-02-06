@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.uax.spring.listacompra.config.ListaCompraDataSources",
+      "sourceMethod": "public javax.sql.DataSource getDBCopmras() "
+    },
+    {
+      "name": "spring.segunda.db",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.uax.spring.listacompra.config.ListaCompraDataSources",
+      "sourceMethod": "public javax.sql.DataSource getDBProveedor() "
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
