@@ -16,7 +16,8 @@ public class UsuarioRepository implements IUsuarioRepository{
 	JdbcTemplate jdbctemplate;
 	
 	public UsuarioDTO findByUsername(String username) {
-		String sql = String.format("SELECT username, password FROM users WHERE username='%s'", username);
+		String sql = String.format("SELECT u.username, u.password, a.authority "
+				+ "From users u, authorities a WHERE u.username=a.username AND u.username='%s';", username);
 		return jdbctemplate.queryForObject(sql,new UsuarioRowMapper());
 	}
 

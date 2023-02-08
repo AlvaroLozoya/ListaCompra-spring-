@@ -20,6 +20,8 @@ import com.uax.spring.listacompra.dto.CompraDTO;
 import com.uax.spring.listacompra.dto.UsuarioDTO;
 import com.uax.spring.listacompra.repositories.CompraRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class WelcomeController {
 
@@ -46,7 +48,7 @@ public class WelcomeController {
 	 */
 	@Cacheable(value = "compras")
 	@GetMapping("/go-to-lista")
-	public String goToLista(Model model) {
+	public String goToLista(Model model, HttpServletRequest request) {
 
 		listaCompra = comprarepository.getAllCompras();
 		listaCategorias = comprarepository.getAllCategorias();
@@ -56,6 +58,9 @@ public class WelcomeController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("userName", authentication.getName());
+		
+		boolean esAdmin = request.isUserInRole("ROLE_ADMIN");
+		model.addAttribute("admin", esAdmin);
 
 		return "pLista";
 	}

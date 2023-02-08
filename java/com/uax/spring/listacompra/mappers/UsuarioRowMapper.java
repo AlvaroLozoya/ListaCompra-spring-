@@ -14,6 +14,7 @@ public class UsuarioRowMapper implements RowMapper<UsuarioDTO> {
 
 		user.setUserName(rs.getString(1));
 		user.setPassword(rs.getString(2));
+		user.setRoles(rs.getString(3));
 		return user;
 	}
 }

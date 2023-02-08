@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registro</title>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=_FSBWvGKud8hJ0jmGCynFTfsCa_-kpMfaAwNeEz7JlpPFgxe1H3HBGmo4fHvyvTFk6Cc4mj2Dd_0Idad8Egtrw1B-k3hfyu-Sjuet2DhC7BxiGcOMcCYT9trM0QFzV6Q4c_a3H0jWWoPIBLMeZxPsE3gfcEAwRER_L8yXnv76uA" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jYW1wdXMudWF4LmVzL21vb2RsZS9wbHVnaW5maWxlLnBocC8xMzE0ODYwL21vZF9mb2xkZXIvY29udGVudC8wL3JlZ2lzdHJhdGlvbi5odG1sP2ZvcmNlZG93bmxvYWQ9MQ"/></head>
+<body>
+<h3>Registro</h3>
+<form method="post" th:action="@{/pantallaRegistro}" th:object="${usuario}">
+<pre>
+Usuario :    <input type="text" name="userName"/>
+
+Contraseña: <input type="password" name="password"/>
+
+    <input type="submit" value="Registrar"/>
+
+</pre>
+</form>
+<div th:text="${msg}"></div>
+</body>
+</html>	
