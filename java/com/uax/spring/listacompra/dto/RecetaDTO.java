@@ -1,5 +1,7 @@
 package com.uax.spring.listacompra.dto;
 
+import java.util.ArrayList;
+
 public class RecetaDTO {
 	public String idMeal;
 	public String strMeal;
@@ -371,6 +373,13 @@ public class RecetaDTO {
 		}
 		public void setDateModified(Object dateModified) {
 			this.dateModified = dateModified;
+		}
+		
+		public ArrayList<String> getIngredients(){
+			ArrayList<String> lista = new ArrayList<String>();
+			lista.add(strIngredient1);
+			lista.add(strIngredient2);
+			return lista;
 		}
 	    
 	    

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uax.spring.listacompra.dto.UsuarioDTO;
+import com.uax.spring.listacompra.services.UserService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -22,21 +23,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class UsuarioController {
 
 	@Autowired
-	private JdbcUserDetailsManager jdbcUserDetailsManager;
-
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	UserService userservice;
 
 	@PostMapping(value = "/registrarUsuario")
-	public ResponseEntity<String> register(@RequestBody UsuarioDTO myUser) {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(myUser.getRoles()));
-
-		String encodededPassword = bCryptPasswordEncoder.encode(myUser.getPassword());
-
-		User user = new User(myUser.getUserName(), encodededPassword, authorities);
-
-		jdbcUserDetailsManager.createUser(user);
+	public ResponseEntity<String> register(@RequestBody UsuarioDTO usuario) {
+		userservice.registerUserDB(usuario);
 
 		return new ResponseEntity<>("OK", HttpStatus.OK);
 	}

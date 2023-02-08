@@ -28,8 +28,14 @@ public class CompraRepository implements ICompraRepository {
 		boolean save = false;
 		int id;
 		try {
-			String sql = String.format("INSERT INTO compras (descripcion, categoria) VALUES ('%s', %d)", compra.getDescripcion(), compra.getCategoria().getCategoria());
-			jdbctemplate.execute(sql);
+			if (getCompraByNombre(compra.getDescripcion()) != null) {
+				String sql1 = String.format("UPDATE compras SET enabled=1 WHERE id=%d", compra.getId());
+				jdbctemplate.execute(sql1);
+			}else {
+				String sql = String.format("INSERT INTO compras (descripcion, categoria, enabled) VALUES ('%s', %d, 1)", compra.getDescripcion(), compra.getCategoria().getCategoria());
+				jdbctemplate.execute(sql);
+			}
+			
 			
 			save = true;
 		} catch (Exception e) {
@@ -56,7 +62,7 @@ public class CompraRepository implements ICompraRepository {
 		// resultado
 		List<CompraDTO> listaCompra = new ArrayList();
 
-		listaCompra = jdbctemplate.query("SELECT com.id, com.descripcion, com.categoria, cat.nombre FROM compras com, categorias cat WHERE com.categoria=cat.categoria", new CompraRowMapper());
+		listaCompra = jdbctemplate.query("SELECT com.id, com.descripcion, com.categoria, cat.nombre FROM compras com, categorias cat WHERE com.categoria=cat.categoria AND enabled=1", new CompraRowMapper());
 		return listaCompra;
 	}
 	public List<CategoriaDTO> getAllCategorias() {
@@ -68,9 +74,16 @@ public class CompraRepository implements ICompraRepository {
 		return listaCategorias;
 	}
 
-	public CompraDTO getCompraById(int id) {
+	public CompraDTO getCompraById(long id) {
 		List<CompraDTO> modify = new ArrayList();
 		String sql = String.format("SELECT com.id, com.descripcion, com.categoria, cat.nombre FROM compras com, categorias cat WHERE com.categoria=cat.categoria AND id=%d", id);
+		modify = jdbctemplate.query(sql, new CompraRowMapper());
+		CompraDTO compra = modify.get(0);
+		return compra;
+	}
+	public CompraDTO getCompraByNombre(String descripcion) {
+		List<CompraDTO> modify = new ArrayList();
+		String sql = String.format("SELECT com.descripcion FROM compras com WHERE descripcion=%s", descripcion);
 		modify = jdbctemplate.query(sql, new CompraRowMapper());
 		CompraDTO compra = modify.get(0);
 		return compra;
@@ -79,7 +92,7 @@ public class CompraRepository implements ICompraRepository {
 	public boolean deleteCompra(int id) {
 		boolean deleted = false;
 		try {
-			String sql = String.format("DELETE FROM compras WHERE id=%d", id);
+			String sql = String.format("UPDATE compras SET enabled=0 WHERE id=%d", id);
 			jdbctemplate.execute(sql);
 			deleted = true;
 		} catch (Exception e) {
