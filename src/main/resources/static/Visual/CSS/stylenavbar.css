@@ -1,0 +1,21 @@
+.text1{
+	margin-left: 10px;
+}
+.text2{
+	color:white ;
+}
+.perfil-img{
+	height: 40px;
+	width: 40px;
+	margin-top: -26px;
+	margin-right: -10px;
+}
+.navbar-custom{
+	height: 56px;
+}
+.navbardivider{
+	
+	background-color: grey;
+	height: 30px;
+	width: 1px;
+}

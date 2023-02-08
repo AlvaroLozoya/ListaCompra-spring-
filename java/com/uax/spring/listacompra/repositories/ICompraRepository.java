@@ -11,6 +11,6 @@ public interface ICompraRepository {
 	public boolean saveCompra(CompraDTO compra);
 	public Boolean updateCompra(CompraDTO compra);
 	public List<CompraDTO> getAllCompras();
-	public CompraDTO getCompraById(int id);
+	public CompraDTO getCompraById(long id);
 	public boolean deleteCompra(int id);
 }

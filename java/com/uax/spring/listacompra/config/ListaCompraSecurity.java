@@ -65,12 +65,15 @@ public class ListaCompraSecurity {
 
 		http.authorizeRequests()
 		.requestMatchers("/admin/**").authenticated()
-		.requestMatchers("/index").permitAll()
+		.requestMatchers("/go-to-lista").authenticated()
+		.requestMatchers("/login").permitAll()
 		.and().httpBasic()
 		.and().csrf().disable()
-		.formLogin();
-//        .loginPage("/login.html")
-//        .failureUrl("/login-error.html");
+		.formLogin()
+        .loginPage("/login")
+        .loginProcessingUrl("/process-login")
+        .failureUrl("/login?error=true")
+        .defaultSuccessUrl("/go-to-lista");
 		
 //		http.authorizeRequests()
 //		.requestMatchers("/admin").hasRole(ADMIN)

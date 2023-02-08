@@ -1,0 +1,52 @@
+
+.bg-custom{
+	background-color: #313234;
+}
+.bg-image1{
+	background: url("../images/prueba2.jpg");
+	position: relative;
+	justify-content: right;
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-attachment: scroll;
+    background-size: cover;
+}
+.card{
+
+width: 400px;
+background-color: rgba(0,0,0,0.7) !important;
+}
+.alt{
+	margin-left: 10px;
+	height: 45px;
+	width: 95%;
+}
+.wid{
+	width: 95%;
+	margin-left: 2%;
+
+}
+.color-custom1{
+	color: #157347;
+}
+.text1{
+	margin-left: 10px;
+}
+.text2{
+	color:white ;
+}
+.perfil-img{
+	height: 40px;
+	width: 40px;
+	margin-top: -26px;
+	margin-right: -10px;
+}
+.navbar-custom{
+	height: 56px;
+}
+.navbardivider{
+	
+	background-color: grey;
+	height: 30px;
+	width: 1px;
+}

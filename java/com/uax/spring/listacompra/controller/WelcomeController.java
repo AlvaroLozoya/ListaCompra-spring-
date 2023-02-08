@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.spring.listacompra.dto.CategoriaDTO;
 import com.uax.spring.listacompra.dto.CompraDTO;
+import com.uax.spring.listacompra.dto.UsuarioDTO;
 import com.uax.spring.listacompra.repositories.CompraRepository;
 
 @Controller
@@ -28,10 +33,18 @@ public class WelcomeController {
 	public String goToIndex(Model model) {
 
 		model.addAttribute("nombre", "Alvaro");
-
-		return "index";
+		
+		
+		return "login";
 	}
 
+	/**
+	 * Metodo GET para obtener la request y mostrar los resultados de las compras
+	 * 
+	 * @param model
+	 * @return vista a la pantalla de compras
+	 */
+	@Cacheable(value = "compras")
 	@GetMapping("/go-to-lista")
 	public String goToLista(Model model) {
 
@@ -40,6 +53,9 @@ public class WelcomeController {
 
 		model.addAttribute("productos", listaCompra);
 		model.addAttribute("categorias", listaCategorias);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("userName", authentication.getName());
 
 		return "pLista";
 	}
@@ -89,5 +105,18 @@ public class WelcomeController {
 
 		return "addProduct";
 	}
+	
+	@RequestMapping("/login")
+	public String goToLogin(Model model) {
+		UsuarioDTO usuario = new UsuarioDTO();
+		model.addAttribute("usuario", usuario);
+		return "login.html";
+	}
+	
+	@GetMapping(value = "/admin")
+	public String admin() {
+		return "pLista";
+	}
+	
 
 }
