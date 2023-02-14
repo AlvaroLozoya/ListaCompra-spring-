@@ -34,12 +34,5 @@ public class ListaCompraConfig implements WebMvcConfigurer {
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
-//	@Bean
-//	public MessageSource messageSource() {
-//		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-//
-//		messageSource.setBasename("i18n/messages");
-//		messageSource.setDefaultEncoding("UTF-8");
-//		return messageSource;
-//	}
+
 }
