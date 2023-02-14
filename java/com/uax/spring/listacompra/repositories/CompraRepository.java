@@ -28,11 +28,11 @@ public class CompraRepository implements ICompraRepository {
 		boolean save = false;
 		int id;
 		try {
-			if (getCompraByNombre(compra.getDescripcion()) != null) {
+			if (getCompraByNombre(compra.getDescripcion())!=null) {
 				String sql1 = String.format("UPDATE compras SET enabled=1 WHERE id=%d", compra.getId());
 				jdbctemplate.execute(sql1);
 			}else {
-				String sql = String.format("INSERT INTO compras (descripcion, categoria, enabled) VALUES ('%s', %d, 1)", compra.getDescripcion(), compra.getCategoria().getCategoria());
+				String sql = String.format("INSERT INTO compras (descripcion, categoria, enabled) VALUES ('%s', %d, 1)", compra.getDescripcion(), compra.getCategoria());
 				jdbctemplate.execute(sql);
 			}
 			
